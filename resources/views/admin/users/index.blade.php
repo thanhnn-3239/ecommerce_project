@@ -43,8 +43,8 @@
                                 @csrf
                                 @method('delete')
 
-                                <button class="btn btn-delete btn-danger" data-id={{ $user->id }}>Delete</button>
                             </form>
+                            <button class="btn btn-delete btn-danger" data-id={{ $user->id }}>Delete</button>
 
 
                         </td>
