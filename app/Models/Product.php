@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\HandleImageTrait;
+use Doctrine\DBAL\Query\QueryBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -35,5 +36,24 @@ class Product extends Model
     public function assignCategory($categoryIds)
     {
         return $this->categories()->sync($categoryIds);
+    }
+
+    public function getBy($dataSearch, $categoryId)
+    {
+        // $this->whereHas('categories', function ($q) use ($categoryId) {
+        //     return $q->where('category_id', $categoryId);
+        // })->paginate(10);
+        return $this->has('categories', $categoryId)->paginate(10);
+        
+    }
+
+    public function getImagePathAttribute()
+    {
+       return asset($this->images->count() > 0 ? 'upload/' . $this->images->first()->url : 'upload/default.png');
+    }
+
+    public function getSalePriceAttribute()
+    {
+        return $this->attributes['sale'] ? $this->attributes['price'] - ($this->attributes['sale'] * 0.01  * $this->attributes['price']) : 0;
     }
 }
