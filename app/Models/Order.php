@@ -18,6 +18,8 @@ class Order extends Model
         'customer_phone',
         'customer_address',
         'note',
+        'payment',
+        'user_id',
     ];
 
     public function getWithPaginateBy($userId)

@@ -1,17 +1,7 @@
 <!-- Page Header Start -->
 @extends('client.layouts.app')
-@section('title', 'products')
+@section('title', 'Products')
 @section('content')
-    <div class="row ">
-        <div class="d-inline-flex" style="margin-left:40px">
-            <p class="m-0"><a href="">Home</a></p>
-            <p class="m-0 px-2">/</p>
-            <p class="m-0">Shop</p>
-        </div>
-    </div>
-    <!-- Page Header End -->
-
-
     <!-- Shop Start -->
     <div class="container-fluid pt-5">
         <div class="row px-xl-5">

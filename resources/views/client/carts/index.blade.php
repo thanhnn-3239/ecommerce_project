@@ -111,7 +111,7 @@
                           <h5 class="font-weight-bold">Total</h5>
                           <h5 class="font-weight-bold total-price-all"></h5>
                       </div>
-                      <a class="btn btn-block btn-primary my-3 py-3">Proceed
+                      <a href="{{ route('client.checkout.index') }}" class="btn btn-block btn-primary my-3 py-3">Proceed
                           To Checkout</a>
                   </div>
               </div>
@@ -119,6 +119,7 @@
       </div>
   @endsection
   @section('script')
+
       <script>
           $(function() {
               $(document).on('click', '.btn-remove-product', function(e) {

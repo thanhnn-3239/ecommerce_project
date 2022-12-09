@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Permission;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 
@@ -32,6 +33,15 @@ class RoleDatabaseSeeder extends Seeder
             Role::updateOrCreate($role);
         }
 
+        $superAdmin = User::whereEmail('admin@gmail.com')->first();
+
+        if(!$superAdmin)
+        {
+            $superAdmin = User::factory()->create(['email' => 'admin@gmail.com']);
+        }
+        $superAdmin->assignRole('super-admin');
+
+
         $permissions = [
             ['name' => 'create-user', 'display_name' => 'Create user', 'group' => 'User'],
             ['name' => 'update-user', 'display_name' => 'Update user', 'group' => 'User'],
@@ -43,23 +53,23 @@ class RoleDatabaseSeeder extends Seeder
             ['name' => 'show-role', 'display_name' => 'Show Role', 'group' => 'Role'],
             ['name' => 'delete-role', 'display_name' => 'Delete Role', 'group' => 'Role'],
 
-            ['name' => 'create-category', 'display_name' => 'Create category', 'group' => 'Category'],
-            ['name' => 'update-category', 'display_name' => 'Update category', 'group' => 'Category'],
-            ['name' => 'show-category', 'display_name' => 'Show category', 'group' => 'Category'],
-            ['name' => 'delete-category', 'display_name' => 'Delete category', 'group' => 'Category'],
+            ['name' => 'create-category', 'display_name' => 'Create category', 'group' => 'category'],
+            ['name' => 'update-category', 'display_name' => 'Update category', 'group' => 'category'],
+            ['name' => 'show-category', 'display_name' => 'Show category', 'group' => 'category'],
+            ['name' => 'delete-category', 'display_name' => 'Delete category', 'group' => 'category'],
 
-            ['name' => 'create-product', 'display_name' => 'Create product', 'group' => 'Product'],
-            ['name' => 'update-product', 'display_name' => 'Update product', 'group' => 'Product'],
-            ['name' => 'show-product', 'display_name' => 'Show product', 'group' => 'Product'],
-            ['name' => 'delete-product', 'display_name' => 'Delete product', 'group' => 'Product'],
+            ['name' => 'create-product', 'display_name' => 'Create product', 'group' => 'product'],
+            ['name' => 'update-product', 'display_name' => 'Update product', 'group' => 'product'],
+            ['name' => 'show-product', 'display_name' => 'Show product', 'group' => 'product'],
+            ['name' => 'delete-product', 'display_name' => 'Delete product', 'group' => 'product'],
 
-            ['name' => 'create-coupon', 'display_name' => 'Create coupon', 'group' => 'Coupon'],
-            ['name' => 'update-coupon', 'display_name' => 'Update coupon', 'group' => 'Coupon'],
-            ['name' => 'show-coupon', 'display_name' => 'Show coupon', 'group' => 'Coupon'],
-            ['name' => 'delete-coupon', 'display_name' => 'Delete coupon', 'group' => 'Coupon'],
+            ['name' => 'create-coupon', 'display_name' => 'Create coupon', 'group' => 'coupon'],
+            ['name' => 'update-coupon', 'display_name' => 'Update coupon', 'group' => 'coupon'],
+            ['name' => 'show-coupon', 'display_name' => 'Show coupon', 'group' => 'coupon'],
+            ['name' => 'delete-coupon', 'display_name' => 'Delete coupon', 'group' => 'coupon'],
 
-            ['name' => 'list-order', 'display_name' => 'list order', 'group' => 'Orders'],
-            ['name' => 'update-order-status', 'display_name' => 'Update order status', 'group' => 'Orders'],
+            ['name' => 'list-order', 'display_name' => 'list order', 'group' => 'orders'],
+            ['name' => 'update-order-status', 'display_name' => 'Update order status', 'group' => 'orders'],
         ];
 
         foreach($permissions as $item){

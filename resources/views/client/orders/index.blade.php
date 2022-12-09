@@ -67,11 +67,7 @@
               $(document).on("click", ".btn-cancel", function(e) {
                   e.preventDefault();
                   let id = $(this).data("id");
-                  confirmDelete()
-                      .then(function() {
-                          $(`#form-cancel${id}`).submit();
-                      })
-                      .catch();
+                  $(`#form-cancel${id}`).submit();
               });
 
           });

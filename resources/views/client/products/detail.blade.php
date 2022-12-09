@@ -1,15 +1,6 @@
 @extends('client.layouts.app')
-@section('title', 'product detail')
+@section('title', 'Product Detail')
 @section('content')
-    <!-- Page Header Start -->
-    <div class="row" style="margin-left: 50px">
-        <div class="d-inline-flex">
-            <p class="m-0"><a href="">Home</a></p>
-            <p class="m-0 px-2">/</p>
-            <p class="m-0">Shop Detail</p>
-        </div>
-    </div>
-    <!-- Page Header End -->
     @if (session('message'))
         <h2 class="" style="text-align: center; width:100%; color:red"> {{ session('message') }}</h2>
     @endif
@@ -24,7 +15,7 @@
                     <div class="carousel-inner border">
                         <div class="carousel-item active">
                             <img class="w-100 h-100"
-                                src="{{ $product->images->count() > 0 ? asset('upload/' . $product->images->first()->url) : 'upload/default.png' }}"
+                                src="{{ $product->images->count() > 0 ? asset('upload/users/' . $product->images->first()->url) : 'upload/default.png' }}"
                                 alt="Image">
                         </div>
 
