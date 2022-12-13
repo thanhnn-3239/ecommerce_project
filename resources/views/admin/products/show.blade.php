@@ -5,7 +5,6 @@
         <h1>Show Product</h1>
 
         <div>
-
             <div class="row">
                 <div class=" ">
                     <p>Image</p>

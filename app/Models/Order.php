@@ -26,4 +26,9 @@ class Order extends Model
     {
         return $this->whereUserId($userId)->latest('id')->paginate(10);
     }
+
+    public function getAllByLatest()    
+    {
+        return $this->latest('id')->paginate(10);
+    }
 }

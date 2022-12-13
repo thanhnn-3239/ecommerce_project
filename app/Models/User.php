@@ -24,7 +24,8 @@ class User extends Authenticatable
         'email',
         'password',
         'address',
-        'gender'
+        'gender',
+        'phone',
     ];
 
     /**
@@ -54,6 +55,11 @@ class User extends Authenticatable
     public function getImagePathAttribute()
     {
         return asset($this->images->count() > 0 ? 'upload/' . $this->images->first()->url : 'upload/default.png');
+    }
+
+    public function assignRoles(...$roles)
+    {
+        return $this->roles()->sync($roles);
     }
 
 }

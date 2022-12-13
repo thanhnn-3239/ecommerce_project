@@ -95,6 +95,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
+        // dd(auth()->user()->hasRole('super-admin'));
         $product =  $this->product->with(['details', 'categories'])->findOrFail($id);
 
         $categories = $this->category->get(['id','name']);

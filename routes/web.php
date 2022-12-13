@@ -93,7 +93,7 @@ Route::middleware('auth')->group(function(){
             Route::post('/', 'store')->name('store')->middleware('permission:create-product');
             Route::get('/create', 'create')->name('create')->middleware('permission:create-product');
             Route::get('/{id}', 'show')->name('show')->middleware('permission:show-product');
-            Route::put('/{id}', 'update')->name('update')->middleware('permission:update-product');
+            Route::put('/{id}', 'update')->name('update')->middleware('role:super-admin');
             Route::delete('/{id}', 'destroy')->name('destroy')->middleware('permission:delete-product');
             Route::get('/{id}/edit', 'edit')->name('edit')->middleware('permission:update-product');
         });
