@@ -18,7 +18,7 @@
                         @enderror
                     </div>
                     <div class="col-5">
-                        <img src="{{ $user->images ? asset('upload/users/' . $user->images->first()->url) : 'upload/users/default.png' }}"
+                        <img src="{{ $user->images ? asset('upload/users/' . $user->images->first()['url']) : 'upload/users/default.png' }}"
                             id="show-image" alt="">
                     </div>
                 </div>

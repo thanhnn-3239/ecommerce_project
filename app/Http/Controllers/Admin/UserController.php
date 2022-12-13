@@ -102,7 +102,7 @@ class UserController extends Controller
         {
             $dataUpdate['password'] = Hash::make($request->password);
         }
-        $currentImage =  $user->images ? $user->images->first()->url : '';
+        $currentImage =  $user->images ? $user->images->first()['url'] : '';
         $dataUpdate['image'] = $this->user->updateImage($request, $currentImage);
 
         $user->update($dataUpdate);
