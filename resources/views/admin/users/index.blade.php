@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-
+@section('title', 'List User')
 @section('content')
     <div class="card">
         @if (session('message'))

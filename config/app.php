@@ -178,6 +178,7 @@ return [
 
         Barryvdh\Debugbar\ServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        App\Providers\ComposerServiceProvider::class,
     ],
 
     /*

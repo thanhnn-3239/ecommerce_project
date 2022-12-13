@@ -23,9 +23,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'phone',
         'address',
-        'gender'
+        'gender',
+        'phone',
     ];
 
     /**
@@ -51,4 +51,15 @@ class User extends Authenticatable
     {
         return $this->morphMany(Image::class, 'imageable');
     }
+
+    public function getImagePathAttribute()
+    {
+        return asset($this->images->count() > 0 ? 'upload/' . $this->images->first()->url : 'upload/default.png');
+    }
+
+    public function assignRoles(...$roles)
+    {
+        return $this->roles()->sync($roles);
+    }
+
 }

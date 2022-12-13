@@ -7,18 +7,23 @@ use App\Http\Requests\Products\CreateProductRequest;
 use App\Http\Requests\Products\UpdateProductRequest;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductDetail;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    protected $product;
-    protected $category;
 
-    public function __construct(Product $product, Category $category)   
+    protected $category;
+    protected $product;
+    protected $productDetail;
+
+    public function __construct(Product $product, Category $category, ProductDetail $productDetail)
     {
         $this->product = $product;
         $this->category = $category;
+        $this->productDetail =  $productDetail;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +31,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = $this->product->latest('id')->paginate(5);
+        $products =  $this->product->latest('id')->paginate(5);
+
         return view('admin.products.index', compact('products'));
     }
 
@@ -56,7 +62,6 @@ class ProductController extends Controller
         $dataCreate['image'] = $this->product->saveImage($request);
 
         $product->images()->create(['url' => $dataCreate['image']]);
-        dd($dataCreate['category_ids']);
         $product->assignCategory($dataCreate['category_ids']);
         $sizeArray = [];
         foreach($sizes as $size)
@@ -76,7 +81,9 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = $this->product->with(['details', 'categories'])->findOrFail($id);
+        $product =  $this->product->with(['details', 'categories'])->findOrFail($id);
+
+
         return view('admin.products.show', compact('product'));
     }
 
@@ -88,7 +95,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = $this->product->with(['details', 'categories'])->findOrFail($id);
+        // dd(auth()->user()->hasRole('super-admin'));
+        $product =  $this->product->with(['details', 'categories'])->findOrFail($id);
+
         $categories = $this->category->get(['id','name']);
 
         return view('admin.products.edit', compact('categories', 'product'));
@@ -106,13 +115,12 @@ class ProductController extends Controller
         $dataUpdate = $request->except('sizes');
         $sizes = $request->sizes ? json_decode($request->sizes) : [];
         $product = $this->product->findOrFail($id);
-        $currentImage =  $product->images ? $product->images->first()['url'] : '';
+        $currentImage =  $product->images ? $product->images->first()->url : '';
         $dataUpdate['image'] = $this->product->updateImage($request, $currentImage);
 
         $product->update($dataUpdate);
 
         $product->images()->create(['url' => $dataUpdate['image']]);
-        dd($dataUpdate);
         $product->assignCategory($dataUpdate['category_ids']);
         $sizeArray = [];
         foreach($sizes as $size)
@@ -137,5 +145,6 @@ class ProductController extends Controller
         $imageName =  $product->images->count() > 0 ? $product->images->first()->url : '';
         $this->product->deleteImage($imageName);
         return redirect()->route('products.index')->with(['message' => 'Delete product success']);
+
     }
 }
