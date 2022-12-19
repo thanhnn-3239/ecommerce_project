@@ -14,3 +14,5 @@ yarn-error.log
 /.idea
 /.vscode
 /public/upload
+/storage/backup/*
+/resources/lang/vendor/*
